@@ -29,10 +29,18 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="{{route('admin.dashboard')}}" class="nav-link active">
+          <a href="{{route('admin.dashboard')}}" class="nav-link {{ request()->is('dashboard')? 'active':''}}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('admin.brands.index')}}" class="nav-link {{ request()->is('brands')? 'active':''}}">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Brands
             </p>
           </a>
         </li>

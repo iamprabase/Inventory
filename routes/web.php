@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LandingPageController@index')->name('welcome');
 
-Auth::routes(['register' => false]);
+Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
+  Route::name('admin.')->group( function () {
+    Auth::routes(['register' => false]);
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('brands', 'BrandController');
+  });
 
-Route::get('/dashboard', 'HomeController@index')->name('admin.dashboard');
+});
+
