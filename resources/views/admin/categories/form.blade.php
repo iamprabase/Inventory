@@ -1,5 +1,5 @@
-<input type="hidden" name="id" value="{{ $brand->id }}">
-@if($brand->id) <input type="hidden" name="_method" value="PATCH"> @endif
+<input type="hidden" name="id" value="{{ $category->id }}">
+@if($category->id) <input type="hidden" name="_method" value="PATCH"> @endif
 
 <div class="form-group">
 

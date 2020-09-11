@@ -20,6 +20,8 @@ Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
     Auth::routes(['register' => false]);
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('brands', 'BrandController');
+    Route::resource('categories', 'CategoryController');
+    Route::resource('products', 'ProductController');
   });
 
 });
