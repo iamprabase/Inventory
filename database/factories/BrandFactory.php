@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Brand::class, function (Faker $faker) {
     return [
-        'name' => $faker->unique()->name
+        'name' => $faker->unique()->name,
+        'status' => $faker->randomElement(array('Active', 'Inactive'), 1)
     ];
 });

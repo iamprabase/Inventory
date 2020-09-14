@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\Admin\CategoryRequest;
 use App\Http\Repositories\Admin\CategoryRepository;
 
 class CategoryController extends BaseController
@@ -50,7 +51,7 @@ class CategoryController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $params = $request->except('_token');
 
@@ -95,7 +96,7 @@ class CategoryController extends BaseController
      * @param  \App\Category  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $category = $this->categoryRepository->updateCategory($request->toArray());
 

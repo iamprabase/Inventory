@@ -14,7 +14,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
     protected $repositories = [
       BaseContract::class => BaseRepository::class, 
-      BrandContract::class => BrandRepository::class
+      BrandContract::class => BrandRepository::class,
+      CategoryContract::class => CategoryRepository::class,
+      ProductContract::class => ProductRepository::class,
+      
     ];
 
     public function register()

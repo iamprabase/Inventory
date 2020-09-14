@@ -14,7 +14,8 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet"
+      href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
@@ -28,49 +29,70 @@
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <!-- Toastr -->
-    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}"> */
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">    
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <!-- Ekko Lightbox -->
+    <link rel="stylesheet" href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-      .wrapper, body, html {
+      .wrapper,
+      body,
+      html {
         margin-top: -10px;
       }
 
-      .fa-edit{
+      .fa-edit {
         color: #d2a316;
-        margin-right: 10px; 
+        margin-right: 10px;
       }
 
-      .fa-trash{
+      .fa-trash {
         color: #ff0000;
       }
 
-      .ui.button{
+      .ui.button {
         background: #fff;
         border: 1px solid #c4c4c9;
         color: #393e47;
         height: 38px;
-        margin-right:0px;
+        margin-right: 0px;
       }
 
-      .ui.button:hover{
+      .ui.button:hover {
         background: #edeeef;
       }
 
-      .close{
+      .close {
         font-size: 2rem;
       }
+
+      .d-inline-grid {
+        display: inline-grid;
+        align-items: center;
+        background: #f7f3f3;
+        cursor: pointer;
+        margin: 10px 0px 5px 60px;
+      }
+
+      .submitBtn {
+        float: right;
+        width: 200px;
+      }
+
     </style>
     @yield('customstyles')
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      
+
       @include('layouts.partials.admin.header')
-      
+
       @include('layouts.partials.admin.sidebar')
 
       <!-- Content Wrapper. Contains page content -->
@@ -123,11 +145,16 @@
     <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
-
+    <!-- Ekko Lightbox -->
+    <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+    <!-- Filterizr-->
+    <script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
     <!-- Toastr -->
     <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
     <script>
@@ -149,6 +176,10 @@
         showToast('error', @json(session()->get('error')));
       @endif
 
+      //Initialize Select2 Elements
+      $('.select-2').select2({
+        'allowClear': true
+      });
     </script>
     @yield('customscripts')
   </body>

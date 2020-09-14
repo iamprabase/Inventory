@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class BrandSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Brand::class, 20)->create();
+        factory(\App\Admin::class, 5)->create();
     }
 }
