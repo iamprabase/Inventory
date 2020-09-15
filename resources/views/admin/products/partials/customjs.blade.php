@@ -24,11 +24,11 @@
     const tableBody = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
     const editUrl = "{{ route('admin.products.edit', ':productId') }}";
     const deleteUrl = "{{ route('admin.products.destroy', ':productId') }}";
-    
+
     data.map(product => {
       let nameCell = document.createElement('td');
       nameCell.appendChild(document.createTextNode(product['name']));
-      
+
       let brandCell = document.createElement('td');
       brandCell.appendChild(document.createTextNode(product.brand.name));
 
@@ -48,7 +48,7 @@
       }else{
         categoryCell.append('');
       }
-      
+
       let priceCell = document.createElement('td');
       priceCell.appendChild(document.createTextNode(product['price']));
 
@@ -60,31 +60,31 @@
       badgeSpan.classList.add('right', 'badge', 'badge-'+btnTag);
       badgeSpan.innerHTML = productStatus;
       statusCell.appendChild(badgeSpan);
-      
+
       let actionCell = document.createElement('td');
-      
+
       let editBtn = document.createElement('a');
       editBtn.href = editUrl.replace(':productId', product['id']);
       editBtn.title = "Edit";
       let faEditIcon = document.createElement('span');
       faEditIcon.classList.add('fas', 'fa-edit');
-      
+
       let deleteBtn = document.createElement('a');
       deleteBtn.href = deleteUrl.replace(':productId', product['id']);
       deleteBtn.title = "Delete";
       let faDelIcon = document.createElement('span');
       faDelIcon.classList.add('fas', 'fa-trash');
-      
+
       editBtn.appendChild(faEditIcon);
       deleteBtn.appendChild(faDelIcon);
       actionCell.append(editBtn, deleteBtn);
-      
+
       let createRow = document.createElement('tr');
       createRow.appendChild(nameCell);
       createRow.appendChild(brandCell);
       createRow.appendChild(categoryCell);
       createRow.appendChild(priceCell);
-      createRow.appendChild(statusCell); 
+      createRow.appendChild(statusCell);
       createRow.appendChild(actionCell);
 
       tableBody.appendChild(createRow);
@@ -97,8 +97,8 @@
     "scrollX": false,
     "buttons": [
                   {
-                    extend: 'pdfHtml5', 
-                    title: '{{$title}}', 
+                    extend: 'pdfHtml5',
+                    title: '{{$title}}',
                     exportOptions: {
                       columns: [0,1,2,3,4],
                       stripNewlines: false,
@@ -106,16 +106,16 @@
                     footer: true,
                   },
                   {
-                    extend: 'excelHtml5', 
-                    title: '{{$title}}', 
+                    extend: 'excelHtml5',
+                    title: '{{$title}}',
                     exportOptions: {
                       columns: [0,1,2,3,4],
                     },
                     footer: true,
                   },
                   {
-                    extend: 'print', 
-                    title: '{{$title}}', 
+                    extend: 'print',
+                    title: '{{$title}}',
                     exportOptions: {
                       columns: [0,1,2,3,4],
                     },
@@ -144,21 +144,21 @@
           isValidUploads = false;
           if(!isValidImageType){
             document.getElementById('file-type-error').classList.remove("text-muted");
-            document.getElementById('file-type-error').style.color = "#ff0000";  
-            showToast('error', new Array(`File ${currentFile.name} should be of type jpeg, jpg or png.`));  
+            document.getElementById('file-type-error').style.color = "#ff0000";
+            showToast('error', new Array(`File ${currentFile.name} should be of type jpeg, jpg or png.`));
           }
           if(!isValidImageSize){
             document.getElementById('file-size-error').classList.remove("text-muted");
             document.getElementById('file-size-error').style.color = "#ff0000";
-            showToast('error', new Array(`Image ${currentFile.name} is greater than 2Mb.`));  
+            showToast('error', new Array(`Image ${currentFile.name} is greater than 2Mb.`));
           }
         }else{
           // instance of the FileReader
-          let reader = new FileReader(); 
+          let reader = new FileReader();
           // read the local file
-          reader.readAsDataURL(currentFile); 
-          
-          reader.onloadend = function(){ 
+          reader.readAsDataURL(currentFile);
+
+          reader.onloadend = function(){
             let divTag = document.createElement('div');
             divTag.classList.add('col-sm-2', 'col-md-3', 'd-inline-grid');
             let imgTag = document.createElement('img');
@@ -196,13 +196,13 @@
         let divTag = document.createElement('div');
         divTag.classList.add('col-sm-2', 'col-md-3', 'd-inline-grid');
         let imgTag = document.createElement('img');
-        imgTag.src = "{{ asset($images[0]['src']) }}";
+        imgTag.src = "{{ asset('storage/'.$images[0]['src']) }}";
         imgTag.classList.add('img-fluid', 'mb-2');
         imgTag.alt = 'Preview Image';
         divTag.appendChild(imgTag);
         document.getElementById('imgPreview').append(divTag);
-        debugger;
       });
     @endif
   @endif
 </script>
+
