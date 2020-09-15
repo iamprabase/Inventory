@@ -23,7 +23,7 @@
           <!-- /.card-header -->
           <div class="card-body">
             {!! Form::model($product, ['route' => ['admin.products.update', [$product->id]], 'method' => 'post',
-            'files'=> false, 'id'=>'productForm']) !!}
+            'files'=> true, 'id'=>'productForm']) !!}
             @include('admin.products.form')
             {!! Form::submit('Update', ['class' => 'btn btn-warning', 'id'=>'submitProductBtn']) !!}
             {!! Form::close() !!}

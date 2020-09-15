@@ -145,7 +145,25 @@ class ProductController extends BaseController
      */
     public function update(Request $request, Product $product)
     {
-        //
+      $collection = $request->except('_token', 'category_id', 'image_file', 'files');
+      $images = $request->only('image_file')?$request->only('image_file')['image_file']:null;
+      $categories = $request->category_id;
+      $product = $this->productRepository->updateProduct($collection);
+      DB::beginTransaction();
+
+      $product->category()->sync($categories);
+      DB::commit();
+      if(!empty($images)){
+        $product->image()->delete();
+        foreach($images as $image){
+          $size = $image->getSize();
+          $filename = time().$image->getClientOriginalName();
+          $image_upload = $this->upload($image, $filename, 'public', '/products');
+          $save_image = $this->productRepository->saveImage($image_upload, $filename, $product->id, $size);
+        }
+      }
+
+      return $this->responseRedirect('admin.products.index', 'Product updated successfully.', 'success', false, false);
     }
 
     /**
@@ -156,6 +174,6 @@ class ProductController extends BaseController
      */
     public function destroy(Product $product)
     {
-        //
+      
     }
 }
