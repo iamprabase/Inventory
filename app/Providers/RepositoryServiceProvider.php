@@ -17,6 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
       BrandContract::class => BrandRepository::class,
       CategoryContract::class => CategoryRepository::class,
       ProductContract::class => ProductRepository::class,
+      SupplierContract::class => SupplierRepository::class,
       
     ];
 

@@ -26,10 +26,17 @@ class ProductRequest extends FormRequest
     { 
       
       $rules = [  
-        'name' => 'required' 
+        'name' => 'required|max:191',
+        'sku' => 'required|unique:products|max:100',
+        'available_quantity' => 'required|integer|min:0',
+        'quantity_level_reminder' => 'required|integer|min:0',
+        'price' => "required|regex:/^\d+(\.\d{1,2})?$/",
+        'purchase_price' => "required|regex:/^\d+(\.\d{1,2})?$/"
       ];
 
-      // if($this->getMethod() == 'PUT' || $this->getMethod() == 'PATCH') $rules['name'] .= ',id, ' . $this->request->get("id");
+      if($this->getMethod() == 'PUT' || $this->getMethod() == 'PATCH'){ 
+        $rules['sku'] .= ',id, ' . $this->product->id;
+      }
 
       return $rules;
     }

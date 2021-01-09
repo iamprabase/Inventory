@@ -18,8 +18,12 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('cascade');
             $table->unsignedDecimal('price', 9, 2)->default(0.00);
+            $table->unsignedDecimal('purchase_price', 9, 2)->default(0.00);
             $table->mediumText('description')->nullable();
             $table->enum('stock', ['In-stock', 'Out of Stock'])->default('In-stock');
+            $table->string('sku', 100)->unique();
+            $table->integer('available_quantity')->unsigned()->default(0);
+            $table->integer('quantity_level_reminder')->unsigned()->default(0);
             $table->timestamps();
         });
     }

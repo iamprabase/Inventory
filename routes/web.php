@@ -23,6 +23,7 @@ Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
       Route::resource('brands', 'BrandController');
       Route::resource('categories', 'CategoryController');
       Route::resource('products', 'ProductController');
+      Route::resource('suppliers', 'SupplierController');
     });
   });
 });

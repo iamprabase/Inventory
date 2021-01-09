@@ -4,7 +4,7 @@
   <a href="index3.html" class="brand-link">
     <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
+    <span class="brand-text font-weight-light">{{ config('app.name', 'Inventory Management System') }}</span>
   </a>
 
   <!-- Sidebar -->
@@ -36,30 +36,55 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{route('admin.brands.index')}}" class="nav-link {{ request()->is('brands*')? 'active':''}}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+
+        <li
+          class="nav-item has-treeview {{ request()->is('brands*') || request()->is('categories*') || request()->is('products*')? 'menu-open':''}}">
+          <a href="#"
+            class="nav-link {{ request()->is('brands*') || request()->is('categories*') || request()->is('products*')? 'active':''}}">
+            <i class="nav-icon fas fa-th"></i>
             <p>
-              Brands
+              Product Setup
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('admin.brands.index')}}" class="nav-link {{ request()->is('brands*')? 'active':''}}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Brands
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('admin.categories.index')}}"
+                class="nav-link {{ request()->is('categories*')? 'active':''}}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Categories
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('admin.products.index')}}" class="nav-link {{ request()->is('products*')? 'active':''}}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Products
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="{{route('admin.suppliers.index')}}" class="nav-link {{ request()->is('suppliers*')? 'active':''}}">
+            <i class="nav-icon fas fa-industry"></i>
+            <p>
+              Suppliers
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{route('admin.categories.index')}}" class="nav-link {{ request()->is('categories*')? 'active':''}}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Categories
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{route('admin.products.index')}}" class="nav-link {{ request()->is('products*')? 'active':''}}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Products
-            </p>
-          </a>
-        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

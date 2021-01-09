@@ -26,7 +26,7 @@ class BrandRequest extends FormRequest
     { 
       
       $rules = [  
-        'name' => 'required|unique:brands' 
+        'name' => 'required|unique:brands|max:191' 
       ];
 
       if($this->getMethod() == 'PUT' || $this->getMethod() == 'PATCH') $rules['name'] .= ',id, ' . $this->request->get("id");

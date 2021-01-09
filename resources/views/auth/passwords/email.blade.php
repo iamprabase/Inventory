@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -43,5 +43,65 @@
             </div>
         </div>
     </div>
+</div> -->
+
+
+
+<div class="login-box">
+  <div class="login-logo">
+    <a class="navbar-brand" href="{{ url('/') }}">
+      <b>{{ config("app.name", "Inventory Management System") }}</b>
+    </a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+      @if (session('status'))
+      <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+      </div>
+      @endif
+      <form method="POST" action="{{ route('admin.password.email') }}">
+        @csrf
+
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
+            value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" autocomplete="email" autofocus required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+
+          @error('email')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+          @enderror
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">
+              {{ __('Send Password Reset Link') }}
+            </button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <p class="mb-2">
+        <a class="btn btn-link" href="{{ route('admin.login') }}">
+          {{ __('Login') }}
+        </a>
+      </p>
+      @if (Route::has('admin.register'))
+      <p class="mb-2">
+        <a class="nav-link" href="{{ route('admin.register') }}">{{ __("Register") }}</a>
+      </p>
+      @endif
+    </div>
+    <!-- /.login-card-body -->
+  </div>
 </div>
 @endsection

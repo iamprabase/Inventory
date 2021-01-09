@@ -6,7 +6,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name', 'Laravel') }} - {{$subtitle}}</title>
+    <title>{{ config('app.name', 'Inventory Management System') }} - {{$subtitle}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -40,11 +40,11 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-      .wrapper,
+      /* .wrapper,
       body,
       html {
         margin-top: -10px;
-      }
+      } */
 
       .fa-edit {
         color: #d2a316;

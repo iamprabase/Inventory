@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class BrandRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class BrandRequest extends FormRequest
     { 
       
       $rules = [  
-        'name' => 'required|unique:categories' 
+        'name' => 'required|unique:categories|max:191' 
       ];
 
       if($this->getMethod() == 'PUT' || $this->getMethod() == 'PATCH') $rules['name'] .= ',id, ' . $this->request->get("id");

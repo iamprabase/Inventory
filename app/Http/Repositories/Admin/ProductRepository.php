@@ -65,7 +65,7 @@ class ProductRepository extends BaseRepository implements ProductContract{
   }
 
   public function deleteProduct(int $id){
-    $product = $this->findProductById($attributes['id']);
+    $product = $this->findProductById($id);
     
     $product->delete();
   }

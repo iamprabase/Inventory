@@ -143,7 +143,7 @@ class ProductController extends BaseController
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
       $collection = $request->except('_token', 'category_id', 'image_file', 'files');
       $images = $request->only('image_file')?$request->only('image_file')['image_file']:null;
@@ -172,8 +172,10 @@ class ProductController extends BaseController
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-      
+      $product = $this->productRepository->deleteProduct($id);
+
+      return $this->responseRedirect('admin.products.index', 'Product deleted successfully.', 'success', false, false);
     }
 }
