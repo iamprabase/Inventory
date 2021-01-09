@@ -24,6 +24,8 @@ Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
       Route::resource('categories', 'CategoryController');
       Route::resource('products', 'ProductController');
       Route::resource('suppliers', 'SupplierController');
+      Route::resource('purchase-orders', 'PurchaseOrderController');
+      Route::post('delete-purchase-orders-detail', 'PurchaseOrderController@deletePurchaseOrderDetail')->name('purchase-orders.deletePurchaseOrderDetail');
     });
   });
 });

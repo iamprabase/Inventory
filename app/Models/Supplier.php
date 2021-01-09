@@ -13,4 +13,8 @@ class Supplier extends Model
     $this->attributes['name'] = ucfirst($value);
   }
 
+  public function setContactNameAttribute($value){
+    $this->attributes['contact_person'] = ucfirst($value);
+  }
+
 }

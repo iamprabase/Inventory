@@ -12,6 +12,11 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    /**
+     * Tax Percentage => Tax Name
+     * 
+     */
+    'tax_percentage' => array(0 => 'No Tax', 13 => '13% Tax', 15 => '15% Tax'),
 
     'name' => env('APP_NAME', 'Laravel'),
 

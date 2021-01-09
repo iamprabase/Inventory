@@ -21,6 +21,10 @@ class ProductRepository extends BaseRepository implements ProductContract{
     return $this->all($order, $sort, $columns);
   }
 
+  public function listProductInStock(string $order = 'id', string $sort = 'desc', array $columns = ['*']){
+    return Product::whereStock('In-stock')->orderBy($order, $sort)->get($columns);
+  }
+
   public function listAllProductWithBrandAndCategory(string $order = 'id', string $sort = 'desc', array $columns = ['*']){
     return Product::with('brand')->with('category')->orderBy($order, $sort)->get($columns);
   }

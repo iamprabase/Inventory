@@ -85,6 +85,15 @@
           </a>
         </li>
 
+         <li class="nav-item">
+          <a href="{{route('admin.purchase-orders.index')}}" class="nav-link {{ request()->is('purchase-orders*')? 'active':''}}">
+            <i class="nav-icon fas fa-shopping-cart"></i>
+            <p>
+              Purchase Order
+            </p>
+          </a>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

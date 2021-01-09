@@ -6,6 +6,8 @@ interface ProductContract
 {
   public function listAllProduct(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
 
+  public function listProductInStock(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
+
   public function listAllProductWithBrandAndCategory(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
 
   public function listAllProductWithBrand(string $order = 'id', string $sort = 'desc', array $columns = ['*']);

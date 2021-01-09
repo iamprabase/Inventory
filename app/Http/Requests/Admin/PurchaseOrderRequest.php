@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class SupplierRequest extends FormRequest
+class PurchaseOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,17 @@ class SupplierRequest extends FormRequest
     { 
       
       $rules = [  
-        'name' => 'required|max:191',
-        'contact_person' => 'required|max:191',
-        'email' => 'required|max:100|unique:suppliers',
-        'phone_number' => 'nullable|string|min:8|max:15|unique:suppliers',
+        // 'name' => 'required|max:191',
+        // 'contact_person' => 'required|max:191',
+        // 'email' => 'required|max:100|unique:suppliers',
+        // 'phone_number' => 'nullable|string|min:8|max:15|unique:suppliers',
       ];
 
-      if($this->getMethod() == 'PUT' || $this->getMethod() == 'PATCH'){ 
-        $rules['email'] .= ',id, ' . $this->supplier->id;
-        $rules['phone_number'] .= ',id, ' . $this->supplier->id;
+      // if($this->getMethod() == 'PUT' || $this->getMethod() == 'PATCH'){ 
+      //   $rules['email'] .= ',id, ' . $this->supplier->id;
+      //   $rules['phone_number'] .= ',id, ' . $this->supplier->id;
         
-      }
+      // }
 
       return $rules;
     }
