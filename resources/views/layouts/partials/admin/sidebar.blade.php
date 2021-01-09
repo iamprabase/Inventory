@@ -94,6 +94,25 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="{{route('admin.locations.index')}}" class="nav-link {{ request()->is('locations*')? 'active':''}}">
+            <i class="nav-icon fas fa-map"></i>
+            <p>
+              Locations
+            </p>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="{{route('admin.stock-transfers.index')}}" class="nav-link {{ request()->is('stock-transfers*')? 'active':''}}">
+            <i class="nav-icon fas fa-truck"></i>
+            <p>
+              Stock Transfers
+            </p>
+          </a>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

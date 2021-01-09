@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Model;
 
 class PurchaseOrder extends Model

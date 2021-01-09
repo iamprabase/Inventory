@@ -2,48 +2,49 @@
 <!-- bs-custom-file-input -->
 <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <script>
-
-  @if(request()->is('purchase-orders'))
-    $('#purchaseOrdersTable').on("click", '.fa-trash', function(e){
+  @if(request()->is('stock-transfers'))
+    $('#stockTransfersTable').on("click", '.fa-trash', function(e){
       e.preventDefault();
       $('#modal-delete').modal();
       $('#delForm').attr('action', this.parentElement.href);
     });
-    const data = @json($purchase_orders);
-    const tableBody = document.getElementById('purchaseOrdersTable').getElementsByTagName('tbody')[0];
-    const editUrl = "{{ route('admin.purchase-orders.edit', ':purchaseOrderId') }}";
-    const printUrl = "{{ route('admin.purchase-orders.show', ':purchaseOrderId') }}";
-    const deleteUrl = "{{ route('admin.purchase-orders.destroy', ':purchaseOrderId') }}";
+    const data = @json($stock_transfers);
+    console.log(data);
+    const tableBody = document.getElementById('stockTransfersTable').getElementsByTagName('tbody')[0];
+    const editUrl = "{{ route('admin.stock-transfers.edit', ':stockTransferId') }}";
+    const printUrl = "{{ route('admin.stock-transfers.show', ':stockTransferId') }}";
+    const deleteUrl = "{{ route('admin.stock-transfers.destroy', ':stockTransferId') }}";
 
-    data.map(purchaseOrder => {
-      let invoiceCodeCell = document.createElement('td');
-      invoiceCodeCell.appendChild(document.createTextNode(purchaseOrder['invoice_code']));
-
-      let purchaseDateCell = document.createElement('td');
-      purchaseDateCell.appendChild(document.createTextNode(purchaseOrder.purchase_date));
-
+    data.map(stockTransfer => {
+      
       let grandTotalCell = document.createElement('td');
-      grandTotalCell.appendChild(document.createTextNode(purchaseOrder.grand_total_amount));
+      grandTotalCell.appendChild(document.createTextNode(stockTransfer.total_quantity));
 
-      let supplierNameCell = document.createElement('td');
-      supplierNameCell.appendChild(document.createTextNode(purchaseOrder.supplier.name));
+      let sourceLocationCell = document.createElement('td');
+      sourceLocationCell.appendChild(document.createTextNode(stockTransfer.source.name));
+      
+      let transferDateCell = document.createElement('td');
+      transferDateCell.appendChild(document.createTextNode(stockTransfer.transfer_date));
+
+      let destinationLocationCell = document.createElement('td');
+      destinationLocationCell.appendChild(document.createTextNode(stockTransfer.destination.name));
 
       let actionCell = document.createElement('td');
 
       let editBtn = document.createElement('a');
-      editBtn.href = editUrl.replace(':purchaseOrderId', purchaseOrder['id']);
+      editBtn.href = editUrl.replace(':stockTransferId', stockTransfer['id']);
       editBtn.title = "Edit";
       let faEditIcon = document.createElement('span');
       faEditIcon.classList.add('fas', 'fa-edit');
 
       let printBtn = document.createElement('a');
-      printBtn.href = printUrl.replace(':purchaseOrderId', purchaseOrder['id']);
+      printBtn.href = printUrl.replace(':stockTransferId', stockTransfer['id']);
       printBtn.title = "Print";
       let faprintIcon = document.createElement('span');
       faprintIcon.classList.add('fas', 'fa-eye', 'mr-2');
 
       let deleteBtn = document.createElement('a');
-      deleteBtn.href = deleteUrl.replace(':purchaseOrderId', purchaseOrder['id']);
+      deleteBtn.href = deleteUrl.replace(':stockTransferId', stockTransfer['id']);
       deleteBtn.title = "Delete";
       let faDelIcon = document.createElement('span');
       faDelIcon.classList.add('fas', 'fa-trash');
@@ -54,15 +55,15 @@
       actionCell.append(printBtn, editBtn, deleteBtn);
 
       let createRow = document.createElement('tr');
-      createRow.appendChild(invoiceCodeCell);
-      createRow.appendChild(supplierNameCell);
-      createRow.appendChild(purchaseDateCell);
+      createRow.appendChild(sourceLocationCell);
+      createRow.appendChild(destinationLocationCell);
+      createRow.appendChild(transferDateCell);
       createRow.appendChild(grandTotalCell);
       createRow.appendChild(actionCell);
 
       tableBody.appendChild(createRow);
     });
-    $('#purchaseOrdersTable').DataTable({
+    $('#stockTransfersTable').DataTable({
       "paging": true,
       "responsive": true,
       "scrollY": 200,
@@ -97,37 +98,37 @@
     }).buttons().container().appendTo('#btn_wrapper');
   @else
     const products = @json($products);
-    const taxPercentage = @json(config('app.tax_percentage'));
-    const taxOptions = Object.keys(taxPercentage).map(function(key, index) {
-                          return `<option value="${key}" >${taxPercentage[key]}</option>`;
-                        });
+    const locations = @json($locations);
+    
     $('#productSelect').on('select2:select', function (e) {
-      var data = e.params.data;
+      let data = e.params.data;
       let selObj = products.filter( item => item.id == data.id )[0];
       buildTableData(selObj);
       $(this).val("").trigger('change');
     });
 
+    $('#locationSelect').on('select2:select', function (e) {
+      let data = e.params.data;
+      let buildList = new Array;
+      let selObj = Object.keys(locations).map(function(key, index) {
+                      if(key != data.id) buildList[key] = locations[key]
+                    });
+      $('#transferLocationSelect').find('option').remove();
+      buildList.map(( option, ind) => {
+        $('#transferLocationSelect').append(`<option value="${ind}">${option}</option>`);
+      });
+    });
+
     const buildTableData  = product => {
       let id = product.id;
-      let price = product.price;
       let findIfRowExist = $('#purchaseInvoice').find('.dynamicRows').find(`#prodId${id}`);
       
       if(findIfRowExist.length==0){
         let productCode = `<td>${product.sku}<input type="hidden" name="product_id[]" value="${id}"/></td>`;
         let productQuantity = `<td><input type="number" class="form-control qtyVal" min="1" name="quantity[]" class="purchaseQty" value="1" onChange="updateCalculation();"/></td>`;
-        let productRate = `<td><input type="text" name="price[]" class="purchaseRate form-control" value="${price}" onChange="updateCalculation();"/></td>`;
-        
-        let taxPercent = `<td><select class="taxPercent form-control" onChange="updateCalculation();" name="tax_percent[]">
-        ${taxOptions.join()}
-        </select></td>`;
-        let calTaxAmount = (taxPercentage / 100) * price;
-        let taxAmount = `<td><input type="text" name="tax_amount[]" class="taxAmount form-control" value="${calTaxAmount}" readonly/></td>`;
-        let calAmount = (1 * price) + calTaxAmount;
-        let amount = `<td><input type="text" name="amount[]" class="amount form-control" value="${calAmount}" readonly/></td>`;
         let deleteBtn = `<td><a href="javascript:void(0)" onClick="removeRow(${id});" id="${id}" class="btn delete_row"><i class="fa fa-trash"></i></a></td>`;
 
-        $('#purchaseInvoice').find('.dynamicRows').append(`<tr id="prodId${id}">${productCode}${productQuantity}${productRate}${taxPercent}${taxAmount}${amount}${deleteBtn}</tr>`);
+        $('#purchaseInvoice').find('.dynamicRows').append(`<tr id="prodId${id}">${productCode}${productQuantity}${deleteBtn}</tr>`);
       }else{
         let currentNum = parseInt(findIfRowExist.find('.qtyVal').val());
         findIfRowExist.find('.qtyVal').val(currentNum+1);
@@ -138,45 +139,28 @@
     const updateCalculation = () => {
       let findIfRowExist = $('#purchaseInvoice').find('.dynamicRows').find('tr');
       
-      let subTotal = "";
-      let totalTax = "";
-      let grandTotal = "";
+      let totalQty = "";
       if(findIfRowExist.length>0){
-        subTotal = 0;
-        totalTax = 0;
-        grandTotal = 0;
+        totalQty = 0;
         findIfRowExist.map((ind, row) => {
           let qtyVal = parseInt($(row).find('.qtyVal').val());
-          let purchaseRate = parseFloat($(row).find('.purchaseRate').val());
-          let taxPercent = parseFloat($(row).find('.taxPercent').val());
-          let taxAmount = (taxPercent * purchaseRate * qtyVal) / 100;
-          //parseFloat($(row).find('.taxAmount').val());
-          let amount = (qtyVal * purchaseRate ) + taxAmount;
-          //parseFloat($(row).find('.amount').val());
-          $(row).find('.taxAmount').val( taxAmount );
-          $(row).find('.amount').val( amount );
-          
-          subTotal += purchaseRate * qtyVal;
-          totalTax += taxAmount;
-          grandTotal += amount;
+          totalQty += qtyVal;
         });
       }
 
-      $('#purchaseInvoice').find('.footerRows').find('#subTotal').val(subTotal);
-      $('#purchaseInvoice').find('.footerRows').find('#taxTotal').val(totalTax);
-      $('#purchaseInvoice').find('.footerRows').find('#grandTotal').val(grandTotal);
+      $('#purchaseInvoice').find('.footerRows').find('#totalQty').val(totalQty);
     };
-    const removeRow = (id, purchaseOrderDetailId = null) => {
+    const removeRow = (id, stockTransferDetailId = null) => {
       $('#purchaseInvoice').find('.dynamicRows').find(`#prodId${id}`).remove();
-      if(purchaseOrderDetailId){
+      if(stockTransferDetailId){
         $.ajax({
           headers: {
             'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
           },
           type: "POST",
-          url: "{{ route('admin.purchase-orders.deletePurchaseOrderDetail') }}",
+          url: "{{ route('admin.stock-transfers.deleteStockTransferDetail') }}",
           data: {
-            id: purchaseOrderDetailId
+            id: stockTransferDetailId
           },
           dataType: 'json',
           success: function (data) {

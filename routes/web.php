@@ -26,6 +26,10 @@ Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
       Route::resource('suppliers', 'SupplierController');
       Route::resource('purchase-orders', 'PurchaseOrderController');
       Route::post('delete-purchase-orders-detail', 'PurchaseOrderController@deletePurchaseOrderDetail')->name('purchase-orders.deletePurchaseOrderDetail');
+      Route::resource('locations', 'LocationController');
+      Route::resource('stock-transfers', 'StockTransferController');
+      Route::post('delete-purchase-orders-detail', 'StockTransferController@deleteStockTransferDetail')->name('stock-transfers.deleteStockTransferDetail');
+      
     });
   });
 });

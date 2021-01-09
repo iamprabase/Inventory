@@ -107,9 +107,17 @@ class PurchaseOrderController extends BaseController
      * @param  \App\PurchaseOrder  $purchase_order
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show($id)
     {
-        //
+      $purchase_order = $this->purchaseOrderRepository->findPurchaseOrderWithPurchaseDetailById($id);
+
+      $this->setPageTitle('Purchase Order', 'Purchase Order Detail');     
+      
+      $contexts = [
+        'purchase_order' => $purchase_order,
+      ];
+
+      return view('admin.purchaseorders.show', $contexts);
     }
 
     /**
