@@ -82,7 +82,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12 col-md-6">
+  <!-- <div class="col-sm-12 col-md-6">
     <div class="form-group">
 
       {!! Form::label('brand_id', 'Brand') !!}
@@ -90,6 +90,16 @@
       {!! Form::select('brand_id', array(null => "Select Brand")+$brands, old('brand_id'), ['class' => 'form-control
       select-2', 'data-placeholder' => 'Select Brand', 'required']) !!}
 
+    </div>
+  </div> -->
+  <div class="col-sm-12 col-md-6">
+    <div class="form-group">
+
+      {!! Form::label('category_id', 'Category') !!}
+
+      {!! Form::select('category_id[]', $categories, isset($category_id)?$category_id:old('category_id'), ['class' =>
+      'form-control select-2', 'multiple' => 'multiple', 'data-placeholder' => 'Select Category', 'style' => 'width:
+      100%;']) !!}
     </div>
   </div>
   <div class="col-sm-6">
@@ -105,7 +115,7 @@
   </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
 
@@ -116,7 +126,7 @@
       100%;']) !!}
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="row">
   <div class="col-sm-12 mb-3">

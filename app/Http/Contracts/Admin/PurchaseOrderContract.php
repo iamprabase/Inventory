@@ -8,6 +8,8 @@ interface PurchaseOrderContract
 
   public function listAllPurchaseOrderWithSupplier(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
 
+  public function listTopPurchaseOrderWithSupplier(string $order = 'id', string $sort = 'desc', int $number = 5,array $columns = ['*']);
+
   public function createPurchaseOrder(array $attributes);
 
   public function updatePurchaseOrder(array $attributes);

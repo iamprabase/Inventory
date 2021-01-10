@@ -23,6 +23,10 @@ class PurchaseOrderRepository extends BaseRepository implements PurchaseOrderCon
   public function listAllPurchaseOrderWithSupplier(string $order = 'id', string $sort = 'desc', array $columns = ['*']){
     return PurchaseOrder::with('supplier')->orderBy($order, $sort)->get($columns);
   }
+  
+  public function listTopPurchaseOrderWithSupplier(string $order = 'id', string $sort = 'desc', int $number = 5,array $columns = ['*']){
+    return PurchaseOrder::with('supplier')->orderBy($order, $sort)->take($number)->get($columns);
+  }
 
   public function createPurchaseOrder(array $attributes){
     try{

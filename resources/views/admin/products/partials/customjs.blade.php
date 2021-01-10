@@ -18,8 +18,8 @@
       let nameCell = document.createElement('td');
       nameCell.appendChild(document.createTextNode(product['name']));
 
-      let brandCell = document.createElement('td');
-      brandCell.appendChild(document.createTextNode(product.brand.name));
+      let skuCell = document.createElement('td');
+      skuCell.appendChild(document.createTextNode(product.sku));
 
       let categoryCell = document.createElement('td');
       let productCategories = product.category;
@@ -70,7 +70,7 @@
 
       let createRow = document.createElement('tr');
       createRow.appendChild(nameCell);
-      createRow.appendChild(brandCell);
+      createRow.appendChild(skuCell);
       createRow.appendChild(categoryCell);
       createRow.appendChild(priceCell);
       createRow.appendChild(statusCell);

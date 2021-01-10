@@ -86,17 +86,6 @@
         <a href="{{ route('admin.register') }}">Register</a>
         @endif
         @endauth
-        <!-- @if (Route::has('staff.login'))
-        @auth
-        <a href="{{ route('staff.dashboard') }}">Home</a>
-        @else
-        <a href="{{ route('staff.login') }}">Staff Login</a>
-
-        @if (Route::has('staff.register'))
-        <a href="{{ route('staff.register') }}">Staff Register</a>
-        @endif
-        @endauth
-        @endif -->
       </div>
       @endif
     </div>

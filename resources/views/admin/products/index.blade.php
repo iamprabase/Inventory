@@ -28,7 +28,7 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Brand</th>
+                  <th>Product SKU</th>
                   <th>Category</th>
                   <th>MRP</th>
                   <th>Status</th>
@@ -41,7 +41,7 @@
               <tfoot>
                 <tr>
                   <th>Name</th>
-                  <th>Brand</th>
+                  <th>Product SKU</th>
                   <th>Category</th>
                   <th>MRP</th>
                   <th>Status</th>

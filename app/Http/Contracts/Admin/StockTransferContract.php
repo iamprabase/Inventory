@@ -8,6 +8,8 @@ interface StockTransferContract
 
   public function listAllStockTransferWithSourceDestination(string $order = 'id', string $sort = 'desc', array $columns = ['*']);
 
+  public function listTopStockTransferWithSourceDestination(string $order = 'id', string $sort = 'desc', int $number = 5, array $columns = ['*']);
+
   public function createStockTransfer(array $attributes);
 
   public function updateStockTransfer(array $attributes);

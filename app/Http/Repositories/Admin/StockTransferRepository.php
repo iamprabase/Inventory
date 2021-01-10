@@ -20,6 +20,10 @@ class StockTransferRepository extends BaseRepository implements StockTransferCon
     return $this->all($order, $sort, $columns);
   }
 
+  public function listTopStockTransferWithSourceDestination(string $order = 'id', string $sort = 'desc', int $number = 5,array $columns = ['*']){
+    return StockTransfer::with('source')->with('destination')->orderBy($order, $sort)->take($number)->get($columns);
+  }
+
   public function listAllStockTransferWithSourceDestination(string $order = 'id', string $sort = 'desc', array $columns = ['*']){
     return StockTransfer::with('source')->with('destination')->orderBy($order, $sort)->get($columns);
   }

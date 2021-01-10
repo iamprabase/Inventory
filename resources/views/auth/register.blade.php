@@ -67,7 +67,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
                 <input type="checkbox" name="is_admin" class="form-check-input" id="is_admin" {{ old('is_admin')
@@ -77,7 +77,7 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="social-auth-links text-center mb-3">
             <button type="submit" class="btn btn-primary btn-block">
               {{ __('Register') }}
@@ -89,7 +89,7 @@
 
         <!-- /.social-auth-links -->
         <p class="mb-2">
-          <a class="btn btn-link" href="{{ route('staff.login') }}">
+          <a class="btn btn-link" href="{{ route('admin.login') }}">
             {{ __('Already a Member?') }}
           </a>
         </p>
