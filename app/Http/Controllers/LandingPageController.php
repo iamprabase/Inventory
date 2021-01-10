@@ -25,7 +25,8 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-      if(Auth::guard('admins')->check())  return redirect(RouteServiceProvider::HOME);
+      if(Auth::guard('admins')->check())  return redirect(RouteServiceProvider::ADMIN_HOME);
+      if(Auth::guard('staffs')->check())  return redirect(RouteServiceProvider::STAFF_HOME);
       return view('landingpage');
     }
 }

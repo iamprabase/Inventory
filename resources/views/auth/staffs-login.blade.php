@@ -1,33 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="register-page" style="min-height: 512.391px;">
-  <div class="register-box">
-    <div class="register-logo">
+<div class="login-page" style="min-height: 512.391px;">
+  <div class="login-box">
+    <div class="login-logo">
       <a class="navbar-brand" href="{{ url('/') }}">
         <b>{{ config("app.name", "Inventory Management System") }}</b>
       </a>
     </div>
-    <!-- /.register-logo -->
+    <!-- /.login-logo -->
     <div class="card">
-      <div class="card-body register-card-body">
-        <p class="register-box-msg">{{ __('Login') }}</p>
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">{{ __('Login') }}</p>
 
-        <form method="POST" action="{{ route('admin.register') }}">
+        <form method="POST" action="{{ route('staff.login') }}">
           @csrf
-          <div class="input-group mb-3">
-            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Full Name">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-             @error('name')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-          </div>
           <div class="input-group mb-3">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
               value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" autocomplete="off" required>
@@ -59,46 +46,41 @@
             @enderror
 
           </div>
-          <div class="input-group mb-3">
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-8">
               <div class="icheck-primary">
-                <input type="checkbox" name="is_admin" class="form-check-input" id="is_admin" {{ old('is_admin')
+                <input type="checkbox" name="remember" class="form-check-input" id="remember" {{ old('remember')
                   ? 'checked' : '' }}>
-                <label class="form-check-label" for="is_admin">
-                  Is Admin
+                <label class="form-check-label" for="remember">
+                  {{ __('Remember Me') }}
                 </label>
               </div>
             </div>
           </div>
           <div class="social-auth-links text-center mb-3">
             <button type="submit" class="btn btn-primary btn-block">
-              {{ __('Register') }}
+              {{ __('Login') }}
             </button>
           </div>
-        </div>
-
         </form>
 
         <!-- /.social-auth-links -->
+        @if (Route::has('staff.password.request'))
         <p class="mb-2">
-          <a class="btn btn-link" href="{{ route('staff.login') }}">
-            {{ __('Already a Member?') }}
+          <a class="btn btn-link" href="{{ route('staff.password.request') }}">
+            {{ __('Forgot Your Password?') }}
           </a>
         </p>
+        @endif
+        @if (Route::has('staff.register'))
+        <p class="mb-2">
+          <a class="nav-link" href="{{ route('staff.register') }}">{{ __("Register") }}</a>
+        </p>
+        @endif
       </div>
-      <!-- /.register-card-body -->
+      <!-- /.login-card-body -->
     </div>
   </div>
-  <!-- /.register-box -->
+  <!-- /.login-box -->
 </div>
 @endsection
-
-

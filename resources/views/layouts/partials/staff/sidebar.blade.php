@@ -20,7 +20,6 @@
       </div>
       <div class="info">
         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-        <a href="#" class="d-block">{{ Auth::user()->is_admin? "Admin": "Staff" }}</a>
       </div>
     </div>
 
@@ -30,13 +29,14 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="{{route('admin.dashboard')}}" class="nav-link {{ request()->is('dashboard')? 'active':''}}">
+          <a href="{{route('staff.dashboard')}}" class="nav-link {{ request()->is('dashboard')? 'active':''}}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
             </p>
           </a>
         </li>
+
         <li
           class="nav-item has-treeview {{ request()->is('brands*') || request()->is('categories*') || request()->is('products*')? 'menu-open':''}}">
           <a href="#"
@@ -49,7 +49,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('admin.brands.index')}}" class="nav-link {{ request()->is('brands*')? 'active':''}}">
+              <a href="{{route('staff.brands.index')}}" class="nav-link {{ request()->is('brands*')? 'active':''}}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Brands
@@ -57,7 +57,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('admin.categories.index')}}"
+              <a href="{{route('staff.categories.index')}}"
                 class="nav-link {{ request()->is('categories*')? 'active':''}}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
@@ -66,7 +66,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('admin.products.index')}}" class="nav-link {{ request()->is('products*')? 'active':''}}">
+              <a href="{{route('staff.products.index')}}" class="nav-link {{ request()->is('products*')? 'active':''}}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Products
@@ -75,44 +75,23 @@
             </li>
           </ul>
         </li>
-        @if(Auth::user()->is_admin)
-        <li class="nav-item">
-          <a href="{{route('admin.suppliers.index')}}" class="nav-link {{ request()->is('suppliers*')? 'active':''}}">
-            <i class="nav-icon fas fa-industry"></i>
-            <p>
-              Suppliers
-            </p>
-          </a>
-        </li>
-        @endif
-        <li class="nav-item">
-          <a href="{{route('admin.purchase-orders.index')}}" class="nav-link {{ request()->is('purchase-orders*')? 'active':''}}">
+
+       
+
+         <li class="nav-item">
+          <a href="{{route('staff.purchase-orders.index')}}" class="nav-link {{ request()->is('purchase-orders*')? 'active':''}}">
             <i class="nav-icon fas fa-shopping-cart"></i>
             <p>
               Purchase Order
             </p>
           </a>
         </li>
-        @if(Auth::user()->is_admin)
-        <li class="nav-item">
-          <a href="{{route('admin.locations.index')}}" class="nav-link {{ request()->is('locations*')? 'active':''}}">
-            <i class="nav-icon fas fa-map"></i>
-            <p>
-              Locations
-            </p>
-          </a>
-        </li>
-        @endif
-        @if(Auth::user()->is_admin)
-        <li class="nav-item">
-          <a href="{{route('admin.stock-transfers.index')}}" class="nav-link {{ request()->is('stock-transfers*')? 'active':''}}">
-            <i class="nav-icon fas fa-truck"></i>
-            <p>
-              Stock Transfers
-            </p>
-          </a>
-        </li>
-        @endif
+
+       
+
+
+       
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

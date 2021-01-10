@@ -13,7 +13,7 @@
       <div class="card-body register-card-body">
         <p class="register-box-msg">{{ __('Login') }}</p>
 
-        <form method="POST" action="{{ route('admin.register') }}">
+        <form method="POST" action="{{ route('staff.register') }}">
           @csrf
           <div class="input-group mb-3">
             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Full Name">
@@ -64,17 +64,6 @@
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" name="is_admin" class="form-check-input" id="is_admin" {{ old('is_admin')
-                  ? 'checked' : '' }}>
-                <label class="form-check-label" for="is_admin">
-                  Is Admin
-                </label>
               </div>
             </div>
           </div>

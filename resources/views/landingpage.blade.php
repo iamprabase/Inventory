@@ -71,7 +71,9 @@
     <div class="flex-center position-ref full-height">
     <div class="content">
       <div class="title m-b-md">
-        Landing Page
+        <strong>
+        {{config('app.name', 'Inventory Manageent System')}}
+        </strong>
       </div>
       @if (Route::has('admin.login'))
       <div class="links">
@@ -80,10 +82,21 @@
         @else
         <a href="{{ route('admin.login') }}">Login</a>
 
-        @if (Route::has('register'))
-        <a href="{{ route('register') }}">Register</a>
+        @if (Route::has('admin.register'))
+        <a href="{{ route('admin.register') }}">Register</a>
         @endif
         @endauth
+        <!-- @if (Route::has('staff.login'))
+        @auth
+        <a href="{{ route('staff.dashboard') }}">Home</a>
+        @else
+        <a href="{{ route('staff.login') }}">Staff Login</a>
+
+        @if (Route::has('staff.register'))
+        <a href="{{ route('staff.register') }}">Staff Register</a>
+        @endif
+        @endauth
+        @endif -->
       </div>
       @endif
     </div>

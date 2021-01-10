@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Staff;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,7 @@ class DashboardController extends BaseController
      */
     public function __construct()
     {
-        $this->middleware('auth:admins');
+        $this->middleware('auth:staffs');
     }
 
     /**
@@ -26,6 +26,6 @@ class DashboardController extends BaseController
     public function index()
     {
         $this->setPageTitle('Dashboard', 'Home');
-        return view('admin.dashboard.home');
+        return view('staff.dashboard.home');
     }
 }
