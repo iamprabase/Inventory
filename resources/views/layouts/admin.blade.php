@@ -182,9 +182,12 @@
       $('.select-2').select2({
         'allowClear': true
       });
-       $('#datePicker').datetimepicker({
-          format: 'YYYY-MM-DD'
-        });
+      $('#datePicker').datetimepicker({
+        format: 'YYYY-MM-DD'
+      });
+      $('#datePicker2').datetimepicker({
+        format: 'YYYY-MM-DD'
+      });
       // $('#datemask').inputmask('yyyy-mm-dd', { 'placeholder': 'yyyy-mm-dd' });
     </script>
     @yield('customscripts')

@@ -113,6 +113,24 @@
           </a>
         </li>
         @endif
+        @if(Auth::user()->is_admin)
+        <li class="nav-item">
+          <a href="{{route('admin.reports.index')}}" class="nav-link {{ request()->is('reports*')? 'active':''}}">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Stock Analyzer Report
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('admin.reports.purchase-history-reports.index')}}" class="nav-link {{ request()->is('purchase-history-reports*')? 'active':''}}">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Purchase History Report
+            </p>
+          </a>
+        </li>
+        @endif
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

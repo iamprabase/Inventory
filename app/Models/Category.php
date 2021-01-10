@@ -11,4 +11,9 @@ class Category extends Model
   public function setNameAttribute($value){
     $this->attributes['name'] = ucfirst($value);
   }
+
+  public function products()
+  {
+      return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id');
+  }
 }

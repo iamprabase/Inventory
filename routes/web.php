@@ -36,6 +36,11 @@ Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
       Route::resource('locations', 'LocationController')->middleware('isadmin');
       Route::resource('stock-transfers', 'StockTransferController')->middleware('isadmin');
       Route::post('delete-stock-transfers-detail', 'StockTransferController@deleteStockTransferDetail')->name('stock-transfers.deleteStockTransferDetail')->middleware('isadmin');
+      Route::get('reports', 'ReportController@index')->name('reports.index')->middleware('isadmin');
+      Route::get('get-category-products', 'ReportController@getCategoryProducts')->name('reports.getCategoryProducts')->middleware('isadmin');
+      Route::post('get-reports', 'ReportController@getReport')->name('reports.getReport')->middleware('isadmin');
+      Route::get('purchase-history-reports', 'ReportController@purchaseHistoryReport')->name('reports.purchase-history-reports.index')->middleware('isadmin');
+      Route::post('get-purchase-history-reports', 'ReportController@getPurchaseHistoryReport')->name('reports.getPurchaseHistoryReport')->middleware('isadmin');
       
     });
   });
