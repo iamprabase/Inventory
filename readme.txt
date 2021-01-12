@@ -1,5 +1,7 @@
 Clone the repository into your local machine.
 
+Open terminal and run composer install and npm install.
+
 Fist create a database with any name into your system.
 
 Create a new file  .env into the root of the project folder.
