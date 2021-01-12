@@ -16,10 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingPageController@index')->name('welcome');
 
 Route::get('artisan-migrate', function(){
-  \Artisan::call('migrate');
+  \Artisan::call('migrate:refresh');
 });
-Route::get('artisan-seed', function(){
-  \Artisan::call("db:seed"); 
+Route::get('artisan-admin-seed', function(){
+  \Artisan::call("db:seed", ['--class' => 'AdminSeeder']);
+  $admin = \App\Admin::all();
+  echo '<pre>'.$admin.'</pre>';
+});
+Route::get('artisan-db-seed', function(){
+  \Artisan::call("db:seed");
 });
 
 Route::group(['prefix' => '', 'namespace' => 'Admin'], function () {
