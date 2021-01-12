@@ -72,18 +72,20 @@ class ProductController extends BaseController
     {
 
       $collection = $request->except('_token', 'category_id', 'image_file');
-      $images = $request->only('image_file')['image_file'];
+      $images = !empty($request->only('image_file'))?$request->only('image_file')['image_file']:array();
       $categories = $request->category_id;
       DB::beginTransaction();
       $product = $this->productRepository->createProduct($collection);
       if($product){
         $product->category()->attach($categories);
         DB::commit();
-        foreach($images as $image){
-          $size = $image->getSize();
-          $filename = time().$image->getClientOriginalName();
-          $image_upload = $this->upload($image, $filename, 'public', '/products');
-          $save_image = $this->productRepository->saveImage($image_upload, $filename, $product->id, $size);
+        if(!empty($images)){
+          foreach($images as $image){
+            $size = $image->getSize();
+            $filename = time().$image->getClientOriginalName();
+            $image_upload = $this->upload($image, $filename, 'public', '/products');
+            $save_image = $this->productRepository->saveImage($image_upload, $filename, $product->id, $size);
+          }
         }
       }
 
